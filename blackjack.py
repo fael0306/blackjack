@@ -5,34 +5,41 @@ bb.inicializamao()
 bb.inicializamaopc()
 try:
     bb.mostramao()
-    while bb.testavitoriabj()==False:
-        pergunta = int(input("\n1 - Puxar mais uma carta\n2 - Encerrar rodada\n3 - Verificar vitória\n\n"))
-        if bb.testavitoriabj==True:
+    situacao = bb.testavitoriabj()
+    while not situacao:
+        pergunta = int(input("\n1 - Puxar mais uma carta\n2 - Encerrar rodada\n3 - Verificar vitória\n"))
+        situacao = bb.testavitoriabj()
+        if situacao:
             break
         if pergunta==1:
             bb.puxacarta()
+            if(bb.testavitoriabj()):
+                break
             bb.mostramao()
         if pergunta==2:
             bb.pcjoga()
             if bb.testavitoriapc():
-                print("Você perdeu! O PC fez Blackjack.")
+                print("\nVocê perdeu! O PC fez Blackjack.")
                 break
             else:
-                print("O PC estourou com",sum(bb.pontuacaopc),"pontos.")
-                print("Você venceu!")
+                print("\nO PC estourou com",sum(bb.pontuacaopc),"pontos.")
+                print("\nVocê venceu!")
                 break
         if pergunta==3:
-            if bb.testavitoriapontos():
-                print("Parabéns. Você venceu!")
-                print("Resultado:",sum(bb.pontuacaodacarta),"x",sum(bb.pontuacaopc))
-                break
+            if bb.testavitoriabj():
+                print("Você venceu por Blackjack.")
+            elif bb.testavitoriapontos():
+                print("\nParabéns. Você venceu!")
+                print("\nResultado:",sum(bb.pontuacaodacarta),"x",sum(bb.pontuacaopc))
+            elif bb.testavitoriapc():
+                print("\nVocê perdeu! O PC fez Blackjack.")
             else:
-                print("O PC venceu com",sum(bb.pontuacaopc),"pontos!")
-                break
+                continue
+            break
     if sum(bb.pontuacaodacarta)==21:
-        print("Você venceu por Blackjack!")
+        print("\nVocê venceu por Blackjack!")
     elif sum(bb.pontuacaodacarta)>21:
-        print("Você ultrapassou 21 pontos. Vitória do PC com",sum(bb.pontuacaopc),"pontos.")
+        print("\nVocê ultrapassou 21 pontos. Vitória do PC com",sum(bb.pontuacaopc),"pontos.")
     
     print("Cartas da sua mão: ",", ".join(map(str, bb.cartasmao))) 
     print("Cartas da mão do PC: ",", ".join(map(str,bb.cartaspc)))

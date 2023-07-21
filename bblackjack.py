@@ -63,28 +63,39 @@ def pcjoga():
         naipespc.append(naipe)
         pontuacaopc.append(ponto)
     pontuacaototalpc = sum(pontuacaopc)
-    while (pontuacaototalpc<17 or len(cartaspc)<5) and pontuacaototalpc!=21:
+
+    while (pontuacaototalpc < 17 or len(cartaspc) < 5) and pontuacaototalpc != 21 and pontuacaototalpc <= 21:
         carta, ponto = rd.choice(list(cartas.items()))
         naipe = rd.choice(naipes)
         cartaspc.append(carta)
         naipespc.append(naipe)
         pontuacaopc.append(ponto)
-    pontuacaototalpc = sum(pontuacaopc)
+        pontuacaototalpc = sum(pontuacaopc)
+
+        # Verifica se há Ases e ajusta a pontuação do PC caso necessário
+        num_ases = cartaspc.count("A")
+        while pontuacaototalpc > 21 and num_ases > 0:
+            i = cartaspc.index("A")
+            pontuacaopc[i] = 1
+            pontuacaototalpc = sum(pontuacaopc)
+            num_ases -= 1
+
+    # Ajusta a pontuação final do PC após tratar os Ases
+    pontuacaopc.clear()
+    pontuacaopc.append(pontuacaototalpc)
 
 def testavitoriabj():
     pontuacao = sum(pontuacaodacarta)
-    if pontuacao==21:
-        return True
-    elif pontuacao>21:
-        while "A" in cartasmao and pontuacao>21:
+    num_ases = cartasmao.count("A")
+
+    if pontuacao > 21:
+        while pontuacao > 21 and num_ases > 0:
             i = cartasmao.index("A")
-            pontuacaodacarta[i]=1
-            pontuacao=sum(pontuacaodacarta)
-        if pontuacao>21:
-            return True
-    elif pontuacao<21:
-        return False
-    return True
+            pontuacaodacarta[i] = 1
+            pontuacao = sum(pontuacaodacarta)
+            num_ases -= 1
+
+    return pontuacao > 21
 
 def testavitoriapc():
     pontuacaototalpc = sum(pontuacaopc)
@@ -97,7 +108,6 @@ def testavitoriapontos():
     if testavitoriabj():
         return True
     else:
-        pcjoga()
         pontuacao = sum(pontuacaodacarta)
         pontuacaototalpc = sum(pontuacaopc)
         if pontuacao <= 21 and pontuacao > pontuacaototalpc:
