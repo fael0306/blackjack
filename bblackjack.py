@@ -82,6 +82,8 @@ def testavitoriabj():
             pontuacao=sum(pontuacaodacarta)
         if pontuacao>21:
             return False
+    elif pontuacao<21:
+        return False
     return True
 
 def testavitoriapc():
@@ -92,10 +94,12 @@ def testavitoriapc():
         return False
 
 def testavitoriapontos():
-    if testavitoriabj()==False:
+    if testavitoriabj():
+        return True
+    else:
         pontuacao = sum(pontuacaodacarta)
         pontuacaototalpc = sum(pontuacaopc)
-        if pontuacao>pontuacaototalpc:
+        if pontuacao <= 21 and (pontuacaototalpc > 21 or pontuacao > pontuacaototalpc):
             return True
         else:
             return False
