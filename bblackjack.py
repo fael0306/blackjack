@@ -63,7 +63,7 @@ def pcjoga():
         naipespc.append(naipe)
         pontuacaopc.append(ponto)
     pontuacaototalpc = sum(pontuacaopc)
-    while pontuacaototalpc<17 and len(cartaspc)<5:
+    while (pontuacaototalpc<17 or len(cartaspc)<5) and pontuacaototalpc!=21:
         carta, ponto = rd.choice(list(cartas.items()))
         naipe = rd.choice(naipes)
         cartaspc.append(carta)
@@ -100,7 +100,7 @@ def testavitoriapontos():
         pcjoga()
         pontuacao = sum(pontuacaodacarta)
         pontuacaototalpc = sum(pontuacaopc)
-        if pontuacao <= 21 and (pontuacaototalpc > 21 or pontuacao > pontuacaototalpc):
+        if pontuacao <= 21 and pontuacao > pontuacaototalpc:
             return True
         else:
             return False
