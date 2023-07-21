@@ -64,7 +64,7 @@ def pcjoga():
         pontuacaopc.append(ponto)
     pontuacaototalpc = sum(pontuacaopc)
 
-    while (pontuacaototalpc < 17 or len(cartaspc) < 5) and pontuacaototalpc != 21 and pontuacaototalpc <= 21:
+    while (pontuacaototalpc < 17 or len(cartaspc) < 5) and pontuacaototalpc != 21 and pontuacaototalpc < 21:
         carta, ponto = rd.choice(list(cartas.items()))
         naipe = rd.choice(naipes)
         cartaspc.append(carta)
@@ -84,6 +84,10 @@ def pcjoga():
     pontuacaopc.clear()
     pontuacaopc.append(pontuacaototalpc)
 
+    if pontuacaototalpc > 21:
+        return False
+    return True
+
 def testavitoriabj():
     pontuacao = sum(pontuacaodacarta)
     num_ases = cartasmao.count("A")
@@ -99,18 +103,15 @@ def testavitoriabj():
 
 def testavitoriapc():
     pontuacaototalpc = sum(pontuacaopc)
-    if pontuacaototalpc==21:
-        return True
-    if pontuacaototalpc>21:
-        return False
-
+    return pontuacaototalpc==21
+        
 def testavitoriapontos():
     if testavitoriabj():
         return True
     else:
         pontuacao = sum(pontuacaodacarta)
         pontuacaototalpc = sum(pontuacaopc)
-        if pontuacao <= 21 and pontuacao > pontuacaototalpc:
+        if (pontuacao <= 21 and pontuacao > pontuacaototalpc) or pontuacaototalpc>21:
             return True
         else:
             return False
