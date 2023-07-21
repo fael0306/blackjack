@@ -43,7 +43,7 @@ def inicializamaopc():
         pontuacaopc.append(ponto)
     
 def mostramao():
-    for k in range(2):
+    for k in range(0,len(cartasmao)):
         print(cartasmao[k],"de",naipesmao[k])
     pontuacao = sum(pontuacaodacarta)
     print("Pontuação da mão:",pontuacao)
@@ -81,7 +81,7 @@ def testavitoriabj():
             pontuacaodacarta[i]=1
             pontuacao=sum(pontuacaodacarta)
         if pontuacao>21:
-            return False
+            return True
     elif pontuacao<21:
         return False
     return True
