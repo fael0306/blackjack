@@ -97,6 +97,7 @@ def testavitoriapontos():
     if testavitoriabj():
         return True
     else:
+        pcjoga()
         pontuacao = sum(pontuacaodacarta)
         pontuacaototalpc = sum(pontuacaopc)
         if pontuacao <= 21 and (pontuacaototalpc > 21 or pontuacao > pontuacaototalpc):

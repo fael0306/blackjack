@@ -33,5 +33,8 @@ try:
         print("Você venceu por Blackjack!")
     elif sum(bb.pontuacaodacarta)>21:
         print("Você ultrapassou 21 pontos. Vitória do PC com",sum(bb.pontuacaopc),"pontos.")
+    
+    print("Cartas da sua mão: ",", ".join(map(str, bb.cartasmao))) 
+    print("Cartas da mão do PC: ",", ".join(map(str,bb.cartaspc)))
 except ValueError:
     print("\n\nO valor digitado é inválido")
