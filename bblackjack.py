@@ -43,7 +43,7 @@ def inicializamaopc():
         pontuacaopc.append(ponto)
     
 def mostramao():
-    for k in range(3):
+    for k in range(2):
         print(cartasmao[k],"de",naipesmao[k])
     pontuacao = sum(pontuacaodacarta)
     print("Pontuação da mão:",pontuacao)
@@ -54,7 +54,6 @@ def puxacarta():
     cartasmao.append(carta)
     naipesmao.append(naipe)
     pontuacaodacarta.append(ponto)
-    testavitoriabj()
 
 def pcjoga():
     for _ in range(2):
@@ -71,21 +70,6 @@ def pcjoga():
         naipespc.append(naipe)
         pontuacaopc.append(ponto)
     pontuacaototalpc = sum(pontuacaopc)
-    testavitoriapc()
-
-def jogar():
-    try:
-        pergunta = int(input("\n1 - Puxar mais uma carta\n2 - Encerrar rodada\n3 - Verificar vitória"))
-        while pergunta==1:
-            puxacarta()
-            mostramao()
-            pergunta = int(input("\n1 - Puxar mais uma carta\n2 - Encerrar rodada\n3 - Verificar vitória"))
-        if pergunta==2:
-            pcjoga()
-        if pergunta==3:
-            testavitoriapontos()
-    except ValueError:
-        print("O valor digitado é inválido")
 
 def testavitoriabj():
     pontuacao = sum(pontuacaodacarta)
@@ -104,14 +88,14 @@ def testavitoriapc():
     pontuacaototalpc = sum(pontuacaopc)
     if pontuacaototalpc==21:
         return True
-    elif pontuacaototalpc>21:
+    if pontuacaototalpc>21:
         return False
-    else:
-        jogar()
 
 def testavitoriapontos():
-    pontuacao = sum(pontuacaodacarta)
-    if pontuacao>pontuacaopc:
-        return True
-    else:
-        return False
+    if testavitoriabj()==False:
+        pontuacao = sum(pontuacaodacarta)
+        pontuacaototalpc = sum(pontuacaopc)
+        if pontuacao>pontuacaototalpc:
+            return True
+        else:
+            return False
